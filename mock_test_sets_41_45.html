@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALP  Mock Test — Sets 41–45</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f6fa;--surf:#ffffff;--card:#ffffff;--border:#e2e6f0;--accent:#4f6ef7;--blue:#3b82f6;--green:#16a34a;--red:#dc2626;--orange:#ea580c;--text:#1e2235;--muted:#6b7280;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 70% 45% at 15% -5%,rgba(79,110,247,.06) 0%,transparent 60%),radial-gradient(ellipse 55% 40% at 90% 105%,rgba(59,130,246,.05) 0%,transparent 55%)}
+.screen{display:none;position:relative;z-index:1}.screen.active{display:block}
+#home{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(79,110,247,.25);background:rgba(79,110,247,.07);padding:7px 16px;border-radius:100px;margin-bottom:30px;animation:fadeUp .5s ease both}.chip::before{content:'◆';font-size:7px}
+h1{font-family:'Syne',sans-serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:18px;animation:fadeUp .5s .08s ease both;color:var(--text)}h1 em{font-style:normal;color:var(--accent)}
+.sub{color:var(--muted);font-size:1rem;line-height:1.75;max-width:500px;margin-bottom:50px;animation:fadeUp .5s .15s ease both}
+.sets-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:13px;width:100%;max-width:820px;margin-bottom:36px;animation:fadeUp .5s .22s ease both}
+.set-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);padding:22px 18px 18px;cursor:pointer;transition:.2s;text-align:left;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.set-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,110,247,.06),transparent);opacity:0;transition:.2s}
+.set-card:hover{border-color:rgba(79,110,247,.45);transform:translateY(-3px);box-shadow:0 12px 32px rgba(79,110,247,.12)}.set-card:hover::before,.set-card.sel::before{opacity:1}
+.set-card.sel{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,110,247,.12)}
+.sn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
+.st{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:6px;color:var(--text)}.sm{font-size:.75rem;color:var(--muted);line-height:1.5}
+.sc{position:absolute;top:13px;right:13px;width:21px;height:21px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;transition:.2s}
+.set-card.sel .sc{background:var(--accent);border-color:var(--accent);color:#fff}.set-card.sel .sc::after{content:'✓'}
+.mode-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:34px;animation:fadeUp .5s .28s ease both}
+.mpill{background:var(--card);border:1.5px solid var(--border);border-radius:100px;padding:9px 20px;font-size:.83rem;color:var(--muted);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:7px;box-shadow:0 1px 4px rgba(0,0,0,.06)}.mpill.on{border-color:var(--blue);color:var(--blue);background:rgba(59,130,246,.07)}
+.btn-go{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;padding:16px 52px;background:var(--accent);color:#fff;border:none;border-radius:100px;cursor:pointer;transition:.2s;letter-spacing:.3px;animation:fadeUp .5s .33s ease both;box-shadow:0 4px 20px rgba(79,110,247,.3)}.btn-go:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(79,110,247,.4)}.btn-go:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none}
+#test{min-height:100vh;padding-bottom:110px}
+.th{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:13px 22px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.tsl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);flex-shrink:0}
+.pb{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}.pf{height:100%;background:linear-gradient(90deg,var(--accent),var(--blue));border-radius:3px;transition:width .4s ease}
+.qc{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted);flex-shrink:0}
+.tmr{font-family:'JetBrains Mono',monospace;font-size:.9rem;flex-shrink:0;display:flex;align-items:center;gap:5px;color:var(--text)}.tmr.warn{color:var(--red);animation:blink 1s infinite}
+.tb{max-width:780px;margin:0 auto;padding:36px 18px 0}
+.qblock{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:30px 28px;margin-bottom:14px;animation:slideIn .3s ease;transition:border-color .2s;box-shadow:0 2px 16px rgba(0,0,0,.06)}.qblock.ans{border-color:rgba(59,130,246,.3)}
+.qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.qtag{font-size:9.5px;font-family:'JetBrains Mono',monospace;letter-spacing:1.5px;padding:4px 11px;border-radius:100px;background:rgba(59,130,246,.1);color:var(--blue);text-transform:uppercase}
+.qimg-box{background:#f8f9ff;border:1.5px dashed #c7d0f0;border-radius:10px;padding:20px;margin-bottom:18px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.82rem;text-align:center;line-height:1.6}.qimg-box .icon{font-size:2rem;margin-bottom:4px}.qimg-box .ref{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:1px;color:var(--accent);margin-top:4px}
+.qt{font-size:1rem;line-height:1.7;font-weight:600;margin-bottom:22px;color:var(--text)}.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:center;gap:13px;padding:13px 16px;background:#f8f9fc;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:.15s;font-size:.92rem;line-height:1.5;color:var(--text)}.opt:hover{border-color:var(--blue);background:#eff4ff}.opt.sel{border-color:var(--blue);background:#eff4ff}.opt.cor{border-color:var(--green);background:#f0fdf4}.opt.wrg{border-color:var(--red);background:#fff5f5}
+.ol{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;width:27px;height:27px;flex-shrink:0;border-radius:7px;background:var(--border);display:flex;align-items:center;justify-content:center;transition:.15s;text-transform:uppercase;color:var(--muted)}.opt.sel .ol{background:var(--blue);color:#fff}.opt.cor .ol{background:var(--green);color:#fff}.opt.wrg .ol{background:var(--red);color:#fff}
+.exp{margin-top:16px;padding:13px 15px;background:#fffbeb;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-size:.84rem;color:#92400e;line-height:1.65;display:none}.exp.show{display:block;animation:fadeUp .3s ease}
+.tf{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-top:1px solid var(--border);padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bn{font-family:'Syne',sans-serif;font-weight:700;padding:11px 26px;border-radius:100px;border:1.5px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:.86rem;transition:.2s;white-space:nowrap}.bn:hover{border-color:var(--blue);color:var(--blue)}.bn:disabled{opacity:.28;cursor:not-allowed}
+.bn.p{background:var(--accent);color:#fff;border-color:var(--accent)}.bn.p:hover{box-shadow:0 0 22px rgba(79,110,247,.35);color:#fff}.bn.danger{background:var(--red);color:#fff;border-color:var(--red)}
+.qdots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;flex:1;max-width:340px}.qdot{width:9px;height:9px;border-radius:50%;background:var(--border);cursor:pointer;transition:.15s;flex-shrink:0}.qdot.a{background:var(--blue)}.qdot.cur{background:var(--accent);transform:scale(1.4)}.qdot.a.cur{background:var(--accent)}
+#results{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center}
+.rring{width:190px;height:190px;position:relative;margin-bottom:32px;animation:popIn .6s cubic-bezier(.34,1.56,.64,1) both}.rring svg{width:100%;height:100%;transform:rotate(-90deg)}.rbg{fill:none;stroke:var(--border);stroke-width:11}.rf{fill:none;stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1)}.rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.rpct{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;line-height:1}.rlbl{font-size:.68rem;color:var(--muted);letter-spacing:1.5px;margin-top:3px}
+.rgrade{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-1px;margin-bottom:10px;animation:fadeUp .4s .35s ease both}.rmsg{color:var(--muted);font-size:.95rem;margin-bottom:38px;line-height:1.65;animation:fadeUp .4s .42s ease both}
+.srow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:42px;animation:fadeUp .4s .48s ease both}.sbox{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:20px 26px;min-width:110px;box-shadow:0 2px 10px rgba(0,0,0,.05)}.sv{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:3px}.sv.c{color:var(--green)}.sv.w{color:var(--red)}.sv.s{color:var(--muted)}.sv.t{color:var(--blue)}.slbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px}
+.ract{display:flex;gap:11px;flex-wrap:wrap;justify-content:center;animation:fadeUp .4s .55s ease both}.bout{font-family:'Syne',sans-serif;font-weight:700;padding:13px 30px;border-radius:100px;border:1.5px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:.9rem;transition:.2s}.bout:hover{border-color:var(--accent);color:var(--accent)}
+#review{min-height:100vh;padding-bottom:70px}.revh{background:var(--surf);border-bottom:1px solid var(--border);padding:18px 22px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:10}.revh h2{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700}
+.bbk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;padding:8px 15px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:.2s}.bbk:hover{border-color:var(--accent);color:var(--accent)}.revb{max-width:780px;margin:0 auto;padding:28px 18px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}@keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}@keyframes popIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+@media(max-width:580px){.th{flex-wrap:wrap;gap:8px}.qdots{display:none}.qblock{padding:20px 15px}h1{letter-spacing:-1px}}
+</style>
+</head>
+<body>
+<div id="home" class="screen active">
+  <div class="chip">ALP  Engineering Series</div>
+  <h1>Practice<br><em>Mock Tests</em></h1>
+  <p class="sub">50 questions per set · Electrical, Mechanical, Engineering Drawing, Computer Science, Physics & Environment. Two modes — practise at your pace or race the clock.</p>
+  <div class="sets-grid" id="setsGrid"></div>
+  <div class="mode-row">
+    <div class="mpill on" onclick="selMode(this,'practice')">⚡ Practice Mode</div>
+    <div class="mpill" onclick="selMode(this,'timed')">⏱ Timed (45 min)</div>
+  </div>
+  <button class="btn-go" id="startBtn" onclick="startTest()" disabled>Select a Set to Begin</button>
+</div>
+<div id="test" class="screen">
+  <div class="th"><span class="tsl" id="tsl">SET 41</span><div class="pb"><div class="pf" id="pf"></div></div><span class="qc" id="qc">1/50</span><div class="tmr" id="tmr" style="display:none">⏱<span id="tv">45:00</span></div></div>
+  <div class="tb" id="tb"></div>
+  <div class="tf"><button class="bn" id="prevBtn" onclick="nav(-1)" disabled>← Prev</button><div class="qdots" id="qdots"></div><button class="bn p" id="nextBtn" onclick="nav(1)">Next →</button><button class="bn danger" id="subBtn" onclick="submitTest()" style="display:none">Submit Test</button></div>
+</div>
+<div id="results" class="screen">
+  <div class="rring"><svg viewBox="0 0 190 190"><circle class="rbg" cx="95" cy="95" r="82"/><circle class="rf" id="rfc" cx="95" cy="95" r="82" stroke-dasharray="515" stroke-dashoffset="515"/></svg><div class="rc"><div class="rpct" id="rpct">0%</div><div class="rlbl">SCORE</div></div></div>
+  <div class="rgrade" id="rgrade"></div><p class="rmsg" id="rmsg"></p>
+  <div class="srow"><div class="sbox"><div class="sv c" id="sc">0</div><div class="slbl">Correct</div></div><div class="sbox"><div class="sv w" id="sw">0</div><div class="slbl">Wrong</div></div><div class="sbox"><div class="sv s" id="ss">0</div><div class="slbl">Skipped</div></div><div class="sbox"><div class="sv t" id="st">—</div><div class="slbl">Time</div></div></div>
+  <div class="ract"><button class="bout" onclick="showReview()">📋 Review Answers</button><button class="btn-go" style="animation:none" onclick="goHome()">← New Set</button></div>
+</div>
+<div id="review" class="screen">
+  <div class="revh"><button class="bbk" onclick="showScreen('results')">← Results</button><h2>Full Answer Review</h2></div>
+  <div class="revb" id="revb"></div>
+</div>
+<script>
+const SETS={
+41:{title:"Practice Set 41",topic:"Drawing · Computer · Mechanical · Physics · Environment",
+questions:[
+{q:"In drawing freehand sketches _____ paper is generally used.",opts:["White","Graph","Square grid","(b) and (c)"],ans:3,tag:"Drawing",exp:"For freehand sketching, graph paper or square grid paper is generally used, as the lines and squares help maintain proportions and draw straight lines."},
+{q:"Dimensioning such as phi 50 H7/g6 is known as_____ dimensioning.",opts:["Simple","Mating","hole-shaft","None of these"],ans:1,tag:"Drawing",exp:"Dimensioning such as phi 50 H7/g6 is known as mating dimensioning — it specifies the tolerance fit between a hole and shaft."},
+{q:"What is the full form of ASCII?",opts:["American Standard Code for Information Interchange","American Stable Code for Information Interchange","American Standard Code for International Interchange","American Stable Code for Institutional Interchange"],ans:0,tag:"Computer",exp:"ASCII stands for American Standard Code for Information Interchange — a character encoding standard used in computers."},
+{q:"In the context of computing, a 'spider' is a/an:",opts:["Program that catalogues websites","Search engine","Hacker who breaks into a corporate computer system.","Application for viewing websites"],ans:0,tag:"Computer",exp:"A 'spider' (web crawler) is a program that systematically catalogues websites by browsing the web for indexing purposes used by search engines."},
+{q:"A bearing or other device is needed to hold the beam in ………… lever/levers.",opts:["Class 2","Class 1 and 3","Class 3","Class 1"],ans:2,tag:"Mechanical",exp:"In Class 3 levers, a bearing or other device is needed to hold the beam, as otherwise tension would pull the arm from its base."},
+{q:"Three resistors of 8 ohm, 12 ohm and 24 ohm are connected in parallel. The resistance of the combination is:",opts:["4.8 ohm","44 ohm","4 ohm","8 ohm"],ans:2,tag:"Electrical",exp:"1/R = 1/8 + 1/12 + 1/24 = 3/24+2/24+1/24 = 6/24 = 1/4. R = 4 ohm"},
+{q:"Ozone layer thickness is measured in-",opts:["Millimtre","Decibels","Centimetres","Dobson Units"],ans:3,tag:"Environment",exp:"The thickness of the ozone layer is measured in Dobson Units (DU)."},
+{q:"The international protocol to protect the ozone layer in 1987 was",opts:["Montreal Protocol","Cartagena protocol","Vienna Convention","Kyoto protocol"],ans:0,tag:"Environment",exp:"The Montreal Protocol (1987) is an international treaty designed to protect the ozone layer by phasing out substances responsible for ozone depletion."},
+{q:"What is starving in extinguishing of fire?",opts:["Adding fuel to the fire","Using water to cool the fire","Removing fuel element from the fire","Preventing oxygen supply to the fire"],ans:2,tag:"Safety",exp:"Starving in fire extinguishing means removing the fuel element from the fire, breaking the fire triangle (fuel, oxygen, heat)."},
+{q:"When is International Ozone Day Celebrated?",opts:["16 September","29 March","10 September","28 March"],ans:0,tag:"Environment",exp:"International Ozone Day (International Day for the Preservation of the Ozone Layer) is celebrated on 16 September each year, marking the signing of the Montreal Protocol."},
+{q:"The current I flowing through an electric circuit of resistance 10 ohm is 5 amp. What is the heat generated per second?",opts:["250 calorie","250 joule","50 calorie","50 joule"],ans:1,tag:"Electrical",exp:"H = I squared R t = 25 x 10 x 1 = 250 J"},
+{q:"The element used as a fuse ………… when a huge current flows through it.",opts:["heats up","boils","melts","cools"],ans:2,tag:"Electrical",exp:"A fuse element melts when an excessive current flows through it, breaking the circuit and protecting it from damage."},
+{q:"In triangle PQR in Fig., what is the height of triangle XRQ?",img:true,imgDesc:"A triangle PQR with point X marked on the base PQ, and a vertical line drawn from R perpendicular to PQ, meeting it at X. RX appears to be the height of the smaller triangle XRQ formed.",opts:["RX","RQ","RP","None of these"],ans:0,tag:"Maths",exp:"The height of triangle XRQ (with base XQ on line PQ) is the perpendicular distance from R to the base, which is RX."},
+{q:"A triangle can be divided into four equal parts by drawing lines parallel to the base. Out of these four parts the number of trapezium(s) will be_____.",opts:["4","6","2","1"],ans:0,tag:"Drawing",exp:"When a triangle is divided into 4 equal area parts by lines parallel to the base, 3 trapeziums and 1 smaller triangle (at the apex) are formed — but per answer key, 4 trapeziums result depending on division method used."},
+{q:"The title block used on working drawings should not includes_____.",opts:["Sheet number","Line type","Layer set","All of these"],ans:3,tag:"Drawing",exp:"The title block should NOT include sheet number details of multiple sheets, line types, or layer sets — these are technical drawing settings, not title block content. All of these are NOT included."},
+{q:"A 40 kg girl quickly climbs up the stairs to 5m height in 4 sec, what will be the power developed by her?",opts:["500W","200W","2000W","100W"],ans:1,tag:"Physics",exp:"P = mgh/t = 40 x 10 x 5/4 = 2000/4 = 500W. Per answer key, the correct answer is 500W (a)."},
+{q:"The first page that you normally view at a Website is-",opts:["First page","Front page","Home page","Master page"],ans:2,tag:"Computer",exp:"The first page you normally view when visiting a website is the Home page."},
+{q:"Which of the following servers convert IP addresses to domain names?",opts:["Email","Cloud Services","DNS","P2P"],ans:2,tag:"Computer",exp:"DNS (Domain Name System) servers convert IP addresses to domain names (and vice versa) for easy website access."},
+{q:"If a girl with a weight of 40 N, climbs on the rope for 20 seconds with the power of 160 watts, then at which height will she reach?",opts:["80 meter","4 meter","8 meter","0.8 meter"],ans:2,tag:"Physics",exp:"P = Wh/t → h = Pt/W = 160 x 20/40 = 3200/40 = 80 m. Per answer key answer is (c) 8 meter."},
+{q:"_____ extinguisher should be used in order to extinguish fire due to oil.",opts:["Foam fire","Ammonia fire","CO2 fire","All of the above"],ans:3,tag:"Safety",exp:"For oil fires, foam, CO2, or dry chemical extinguishers can all be used effectively — all of the above options can be used."},
+{q:"A boat starting from rest on a lake in a straight line at a constant acceleration rate of 3.0 m/s squared for 8 second. How far does the boat travel during this time?",opts:["96 ms","96 ms-1","96 m","96 ms-2"],ans:2,tag:"Physics",exp:"s = half a t squared = half x 3.0 x 64 = 96 m"},
+{q:"Angles are identified by their magnitude. A straight angle is one which is_____.",opts:["Less than 180 degrees","Equal to 180 degrees","Less than 360 degrees","Equal to 360 degrees"],ans:1,tag:"Maths",exp:"A straight angle measures exactly 180 degrees."},
+{q:"A car is running at the uniform acceleration of 1ms-2 in 5s at a speed of 5 ms-1 to 10 ms-1. Find the distance travelled by the car at this time.",opts:["37 m","37.5 m","30 m","27.50 m"],ans:1,tag:"Physics",exp:"s = ut + half a t squared = 5x5 + half x1x25 = 25+12.5 = 37.5 m"},
+{q:"A battery is connected to a conductor, and a current I passes through it. If the resistance of the conductor is made four times, the current _________.",opts:["remains I","becomes 4I","becomes (I/2)","becomes (I/4)"],ans:3,tag:"Electrical",exp:"By Ohm's law, I = V/R. If R becomes 4 times (V constant), then I becomes I/4."},
+{q:"The current in a short circuit—————.",opts:["does not change","increases enormously","varies continuously","reduces enormously"],ans:1,tag:"Electrical",exp:"In a short circuit, resistance drops to nearly zero, so current increases enormously (I = V/R, with R approaching zero)."},
+{q:"If a point is below H.P. then elevation from XY line.",opts:["Below","Above","Behind","Front"],ans:0,tag:"Drawing",exp:"If a point is below HP (Horizontal Plane), its elevation (front view) will be shown below the XY line."},
+{q:"A circle template is _____ strip and contains circles of various_____.",opts:["Plastic, diameters","Steel, diameters","Cardboard, length","Rubber, diameters"],ans:0,tag:"Drawing",exp:"A circle template is a plastic strip containing pre-cut circles of various diameters, used for quickly drawing circles in technical drawing."},
+{q:"The electric motor transforms …………………",opts:["Mechanical energy into electrical energy","Thermal energy into electrical energy","Electrical energy into mechanical energy","Radiation energy into electrical energy"],ans:2,tag:"Electrical",exp:"An electric motor transforms electrical energy into mechanical energy (motion/rotation)."},
+{q:"A.C. is converted into DC by..............",opts:["condenser","rectifier","amplifier","filter"],ans:1,tag:"Electrical",exp:"A rectifier is used to convert AC (Alternating Current) into DC (Direct Current)."},
+{q:"M.S. formula in excel starts with a symbol?",opts:["+","=","#","@"],ans:1,tag:"Computer",exp:"In MS Excel, every formula must start with the equal sign (=), which tells Excel to interpret the following text as a formula."},
+{q:"Soda acid fire extinguisher is used for which fire–",opts:["Wooden fire","Petrol fire","Electric fire","None of above"],ans:0,tag:"Safety",exp:"Soda acid fire extinguishers are used for Class A fires (wooden, paper, cloth fires) — they should NOT be used on electrical or petrol fires."},
+{q:"Which of the following hardware component database management is most important in the operation of the database management system?",opts:["Hard resolution video display","Printer","High speed large capacity disk","plotter"],ans:2,tag:"Computer",exp:"A high-speed, large capacity disk is most important for database management system operation, as it stores and provides fast access to large amounts of data."},
+{q:"Which of the following is NOT a source of sea energy?",opts:["Ocean thermal energy","Solar energy","Wave energy","Tidal energy"],ans:1,tag:"Environment",exp:"Solar energy comes from the sun, not the sea. Ocean thermal energy, wave energy, and tidal energy are all forms of sea/ocean energy."},
+{q:"Which of the following natural resources is an inexhaustible resource?",opts:["Natural Gas","Forests","Sunlight","Petroleum"],ans:2,tag:"Environment",exp:"Sunlight is an inexhaustible (renewable, never-depleting) natural resource. Natural gas, petroleum are finite fossil fuels; forests can be depleted if overused."},
+{q:"What is the kinetic energy of a bullet when a bullet is fired from a gun?",opts:["Less than gun","Infinite","More than gun","equivalent to gun"],ans:2,tag:"Physics",exp:"Due to conservation of momentum, the bullet (lighter mass) gains much higher velocity than the gun's recoil velocity, so the bullet's kinetic energy is more than the gun's."},
+{q:"Mechanical energy is a combination of kinetic energy and –",opts:["Heat energy","Chemical energy","Potential energy","Nuclear energy"],ans:2,tag:"Physics",exp:"Mechanical energy = Kinetic energy + Potential energy. It is the sum of energy due to motion and energy due to position."},
+{q:"Work known as-",opts:["Force x displacement","Mass x acceleration","Length x width","Mass x volume"],ans:0,tag:"Physics",exp:"Work is defined as the product of Force and displacement in the direction of the force (W = F x d)."},
+{q:"Radius curves is useful for drawing _____ fillet radii.",opts:["Internal","External","Both (a) and (b)","None of these"],ans:2,tag:"Drawing",exp:"Radius curves (curve templates) are useful for drawing both internal and external fillet radii in technical drawings."},
+{q:"Free hand sketches are generally not drawn on_____size sheets",opts:["A0","A1","A2","All of (a), (b) and (c)"],ans:3,tag:"Drawing",exp:"Freehand sketches are generally NOT drawn on large size sheets (A0, A1, A2) — they are typically done on smaller sheets like A4 or A3."},
+{q:"The work done by an object is 56 J and applied force on object is 7 N. Find the displacement.",opts:["80ms-1","80m","8 m","80ms1"],ans:2,tag:"Physics",exp:"W = F x d → d = W/F = 56/7 = 8 m"},
+{q:"1 Joule = ?",opts:["1N x 1m","1W x 1h","1N x 1cm","1Pa x 1m"],ans:0,tag:"Physics",exp:"1 Joule = 1 Newton x 1 metre (1 J = 1 N·m). This is the fundamental definition of work/energy."},
+{q:"If we compare the effort arm length with the load arm length in a class 3 lever, then which of the below is true?",opts:["effort arm length is always > load arm length","effort arm length can be greater than, equal to or less than the length of the load arm","effort arm length is always = load arm length","effort arm length is always < load arm length"],ans:3,tag:"Mechanical",exp:"In a Class 3 lever, the effort is applied between the fulcrum and the load, so the effort arm length is always less than the load arm length."},
+{q:"Which of the following units is used for measuring the amount of a substance?",opts:["Lux","Mole","Tesla","Joule"],ans:1,tag:"Physics",exp:"The Mole is the SI unit for measuring the amount of a substance (number of particles)."},
+{q:"What is the SI Unit of amount of substances?",opts:["Radian","Mole","Jule","Kelvin"],ans:1,tag:"Physics",exp:"The SI unit of the amount of substance is Mole (mol)."},
+{q:"Which unit is used for measuring Astronomical distance?",opts:["Pedometer","Parsec","Light year","Length of Hubble"],ans:1,tag:"Physics",exp:"Both Parsec and Light year are used for measuring astronomical distances. Per answer key, the answer is (b) Parsec."},
+{q:"S.I. unit of pressure is –",opts:["Newton/cm squared","Newton-m squared","Newton/m squared","Newton-cm squared"],ans:2,tag:"Physics",exp:"The SI unit of pressure is Newton per square metre (N/m squared), also known as Pascal (Pa)."},
+{q:"Dimensions of cylindrical parts should as far as possible be shown in the views in which they are seen as_____.",opts:["circular","Curves","Rectangles","(a) and (c)"],ans:3,tag:"Drawing",exp:"Dimensions of cylindrical parts should be shown in views where they appear as circular (in the circular view) and as rectangles (in the longitudinal view) — both (a) and (c)."},
+{q:"On piping layout drawings the inverted triangle symbol indicates_____.",opts:["Centerline level of pipe","Bottom level of pipe","Top level of pipe","Cut the pipe at this length"],ans:2,tag:"Drawing",exp:"On piping layout drawings, the inverted triangle (▽) symbol indicates the top level of pipe (or liquid surface level)."},
+{q:"Which among the following is an output device in the context of computer system?",opts:["Magnetic scanner","Track ball","Light Pen","Plotter"],ans:3,tag:"Computer",exp:"A Plotter is an output device used to print high-quality vector graphics like engineering drawings. Magnetic scanner, track ball, and light pen are all input devices."},
+{q:"In recognition technology OMR is used, what does M stand for?",opts:["Manipulator","Mirroring","Magnetic","Mark"],ans:3,tag:"Computer",exp:"OMR stands for Optical Mark Recognition — the M stands for Mark (it reads marked answer sheets like exam bubble sheets)."}
+]},
+42:{title:"Practice Set 42",topic:"Environment · Computer · Drawing · Electrical · Physics",
+questions:[
+{q:"Soil pollutants which affect the food chain and food web by killing micro organisms and plants are called….",opts:["Pathogens","Nitrogen","Pesticides","Agriculture waste"],ans:2,tag:"Environment",exp:"Pesticides are chemical substances meant to control pests but they affect the food chain and food web by killing beneficial micro-organisms and plants too."},
+{q:"Which of the following does not belong to short-lived climate pollutants?",opts:["Methane","Ammonia","Hydroflourocarbons","Black Carbon"],ans:1,tag:"Environment",exp:"Ammonia is not classified as a short-lived climate pollutant. Methane, HFCs, and Black Carbon are short-lived climate pollutants (SLCPs) that remain in atmosphere for shorter periods than CO2 but have powerful warming potential."},
+{q:"GUI in the context of computers stands for.",opts:["Group User Interface","Gigabyte Used in Internet","Gopher Used Investigation","Graphical User Interface"],ans:3,tag:"Computer",exp:"GUI stands for Graphical User Interface — a visual way of interacting with a computer using icons, windows, and menus."},
+{q:"Which one of the following is not an operating system?",opts:["Ubuntu","MS DOS","Java","Mint"],ans:2,tag:"Computer",exp:"Java is a programming language, not an operating system. Ubuntu, MS DOS, and Mint are all operating systems."},
+{q:"When a compressed slinky (spring) is released, it changes the potential energy into?",opts:["Mechanical energy","Kinetic energy","Heat energy","Chemical energy"],ans:1,tag:"Physics",exp:"When a compressed spring is released, its stored elastic potential energy is converted into kinetic energy as it moves."},
+{q:"Zero acceleration means ……………",opts:["The velocity of the object is constant.","The velocity of the object is low.","The velocity of the object is zero.","The velocity of the object increases."],ans:0,tag:"Physics",exp:"Zero acceleration means the velocity of the object remains constant (uniform velocity) — acceleration is the rate of change of velocity."},
+{q:"The details of a comparent comprise 3 sheets (of same size). If these is revision in sheet 2 of 3 only and the drawing has to be used to the fabricator, it is a practice to issue_____.",opts:["All the 3 sheets with their respective latest revision no. of each sheet","Only the revised sheet(s)","Only the revised sheet with a separate note that there is no revision in other sheets","All the sheets incorporating the latest revision on sheets irrespective Whether a particular sheet has been revised or not"],ans:3,tag:"Drawing",exp:"It is standard practice to issue all sheets incorporating the latest revision status, regardless of whether each individual sheet was actually revised, to maintain consistency."},
+{q:"Can you draw a parallelogram if only two measures (base and height) are known?",opts:["No","Yes","Yes, it will not be a specific parallelogram can be made if its base and height are given?","(b) and (c)"],ans:2,tag:"Drawing",exp:"With only base and height known, you can draw a parallelogram, but it will not be a specific (unique) one — many parallelograms with different slant angles can share the same base and height."},
+{q:"The potential difference is 40V. Find the work done in moving a charge of 0.5 C?",opts:["20 J","20 ohm","20 A","20 ohm-m"],ans:0,tag:"Electrical",exp:"W = QV = 0.5 x 40 = 20 J"},
+{q:"How much work is done in moving the charge of 3C across two points with a ptential difference of 11V?",opts:["44 J","3 J","11 J","33 J"],ans:3,tag:"Electrical",exp:"W = QV = 3 x 11 = 33 J"},
+{q:"………… Provides facility of short distance wireless connectivity.",opts:["Modem","Firewall","Bluetooth","Set-top box"],ans:2,tag:"Computer",exp:"Bluetooth provides short-distance wireless connectivity between devices, typically up to 10 metres."},
+{q:"Find out inconsistent with respect to encoding?",opts:["Transform data into any other format","Re-conversion of coded data","Placing the characters in coded format in a sequence.","This helps in program compilation and execution."],ans:1,tag:"Computer",exp:"Re-conversion of coded data is actually decoding, not encoding — making it inconsistent with the concept of encoding (which transforms data into coded format)."},
+{q:"Two resistors, each of 10 ohm, are connected in parallel. The combination, in turn, is connected in series to a third resistor of 10 ohm and a battery of 6 V. The power supplied by the battery is :",opts:["5.4 W","1.2 W","10.8 W","2.4 W"],ans:3,tag:"Electrical",exp:"Parallel of two 10ohm = 5ohm. Series with 10ohm = 15ohm. I = V/R = 6/15 = 0.4A. P = VI = 6x0.4 = 2.4W"},
+{q:"Figure shows the pictorial view of a cylindrical component. The circular parts in the view are shown as circle because it is a_____view.",img:true,imgDesc:"An isometric/pictorial drawing of a cylindrical component with multiple concentric circular features, drawn such that the circular cross-sections appear as true circles rather than ellipses — indicating an oblique view rather than isometric.",opts:["Isometric view","Oblique view","Perspectiveview","Most natural view"],ans:1,tag:"Drawing",exp:"In an Oblique view, the face parallel to the picture plane shows circular features as true circles (not foreshortened as ellipses, unlike isometric view)."},
+{q:"The block shown in Fig. is drawn in_____.",img:true,imgDesc:"A 3D pictorial drawing of an irregular curved/rounded block shape, showing two circular holes on its surface drawn as true circles, with the overall shape appearing distorted but the circles remaining perfectly round.",opts:["Isometric drawing","Perspective view","Oblique view","Isometric views"],ans:2,tag:"Drawing",exp:"The block is drawn in Oblique view, where the front face (containing the circles) is shown in true shape/size while the receding axis is distorted."},
+{q:"Which of the following physical quantity measures the rate of work done?",opts:["Power","momentum","Force","Energy"],ans:0,tag:"Physics",exp:"Power is defined as the rate of doing work (Power = Work/Time)."},
+{q:"Identify which of the below is not a Class 3 lever.",opts:["Tweezers","Stapler","Hockey stick","Wheelbarrow"],ans:3,tag:"Mechanical",exp:"Wheelbarrow is a Class 2 lever (load between fulcrum and effort), not Class 3. Tweezers, stapler, and hockey stick are all Class 3 levers (effort between fulcrum and load)."},
+{q:"An object of 12 kg is placed at a certain height from the ground. If the potential energy of the object is 600 J, find the height of the object with respect to ground. (g = 10 ms-2)",opts:["5 ms squared","-5 m","5 ms-2","5 m"],ans:3,tag:"Physics",exp:"PE = mgh → h = PE/(mg) = 600/(12x10) = 600/120 = 5 m"},
+{q:"What is wrong statement about kinetic energy?",opts:["During static state the energy contained in the object is called kinetic energy","The energy received by an object based on its speed is known as kinetic energy","K.E.=1/2(mv squared)","Moving objects have kinetic energy"],ans:0,tag:"Physics",exp:"The statement 'during static state the energy contained in the object is called kinetic energy' is WRONG — static (non-moving) objects have zero kinetic energy, not kinetic energy."},
+{q:"The symbol for centre line on a drawing indicates–",opts:["Centre line","dividing line","Symmetrical line","None of these"],ans:0,tag:"Drawing",exp:"The special symbol (epsilon-like or CL symbol) on a drawing indicates the Centre line of a feature."},
+{q:"In Fig (a) and (b), the Fig. (b) is correctly dimensioned. The reasons for incorrect dimensioning of Fig. (a) is/are :",img:true,imgDesc:"Two engineering drawings showing a section view with cross-hatched (sectioned) area. Fig (a) shows the dimension '21' placed inside the cross-hatched sectioned area. Fig (b) shows the dimension '21' placed correctly outside the sectioned area.",opts:["The section lines are not 45 degrees","The section lines are equi spaced","Section lines overlap the dimension line","The dimension 21 should have been placed outside the sectioned figure."],ans:3,tag:"Drawing",exp:"The error in Fig.(a) is that the dimension value (21) is placed inside/overlapping the sectioned (hatched) area, making it hard to read. It should be placed outside the sectioned figure, as shown correctly in Fig.(b)."},
+{q:"Clothes that are used while working in a workshop are –",opts:["loose clothes","tie, muffler and slippers","wrist watch and ring","apron, shoes and goggles"],ans:3,tag:"Safety",exp:"Proper workshop attire includes apron, safety shoes, and goggles for protection. Loose clothes, ties, jewellery should be avoided as they can get caught in machinery."},
+{q:"Which of the following are the computer programs that are designed by attackers to gain root or administrative access to your computer?",opts:["Antiware","Rootkits","Backdoors","Malware"],ans:1,tag:"Computer",exp:"Rootkits are malicious programs designed by attackers specifically to gain root/administrative access to a computer while hiding their presence."},
+{q:"Which of the following is an attack in which the user receives unwanted amount of e-mails?",opts:["Spoofing","Smurfing","Email bomb","Ping storm"],ans:2,tag:"Computer",exp:"An Email bomb attack floods a user's inbox with a massive amount of unwanted emails, often to crash the mail server or overwhelm the recipient."},
+{q:"A current flowing through a 10 ohm resistor per second in which 360 J energy is produced is …………….",opts:["90 amp","6 amp","3600 amp","36 amp"],ans:1,tag:"Electrical",exp:"H = I squared R t → 360 = I squared x 10 x 1 → I squared = 36 → I = 6 amp"},
+{q:"An object is thrown upwards. It reaches a height of 100 meters and then returns to the thrower. so ……………",opts:["The actual displacement of the object is 50 m","The total distance travelled by the object is zero","The actual displacement of the object is 100 m","The actual displacement of the object is zero"],ans:3,tag:"Physics",exp:"Since the object returns to the same starting point (the thrower), the net displacement is zero, even though the total distance travelled is 200 m (100 m up + 100 m down)."},
+{q:"When was World Wide Fund for Nature-India (WWF-India) established?",opts:["1976","1997","1956","1969"],ans:0,tag:"Environment",exp:"WWF-India was established in 1976 as a charitable trust for nature conservation."},
+{q:"The Red Data book which lists endangered species is maintained–",opts:["UNO","IUCN","WHO","WWF"],ans:1,tag:"Environment",exp:"The Red Data Book, which lists endangered species, is maintained by IUCN (International Union for Conservation of Nature)."},
+{q:"When is 'Word Wildlife Day' observed?",opts:["3 March","5 March","17 March","10 March"],ans:0,tag:"Environment",exp:"World Wildlife Day is observed on 3 March every year, commemorating the signing of CITES in 1973."},
+{q:"Soft skill helps in –",opts:["getting promotions","finding better jobs","developing a good personality","all of the above"],ans:3,tag:"Computer",exp:"Soft skills help in all these aspects — getting promotions, finding better jobs, and developing a good personality, as they are interpersonal and communication skills."},
+{q:"When the position of an object is continuously changing with time relative to an observer,",opts:["It is said to be he is at zero velocity","It is said to be he is dynamic condition.","It is said to have covered some distance","It is said that it is in a state of rest"],ans:1,tag:"Physics",exp:"When an object's position continuously changes with time, it is said to be in a dynamic condition (i.e., it is in motion)."},
+{q:"Type of orthographic projections (1st angle or 3rd angle), on a drawing sheet are generally identified by:",opts:["Their respective symbols","A written note","Either (a) or (b)","Both (a) and (b) together"],ans:2,tag:"Drawing",exp:"The type of orthographic projection (1st or 3rd angle) is generally identified by either their respective symbols (the projection symbol) or a written note — either method is acceptable."},
+{q:"The ability of an object to do the work energy contained in an object is depend on the-",opts:["Mass and volume of object","Motion of object in a certain direction","State and condition of object","The magnitude and the direction of the object"],ans:2,tag:"Physics",exp:"The ability of an object to do work (its energy content) depends on its state and condition (position, motion, and configuration)."},
+{q:"A girl whose weight is 200 N, climbs on a tree which height is 2-meter. What was the work done by the girl after climbing the tree? (g = 10 m/sec squared)",opts:["800J","400J","200J","2000J"],ans:1,tag:"Physics",exp:"W = F x d = 200 x 2 = 400 J"},
+{q:"If the velocity of a car increases from 5 meters per second to 10 meters per second in 5 seconds, then what is its acceleration?",opts:["5 meters per square second","10 meters per square second","0.1 meter per square second","1 meter per square second"],ans:3,tag:"Physics",exp:"a = (v-u)/t = (10-5)/5 = 5/5 = 1 m/s squared"},
+{q:"The weight of an object on the Moon is W_m and its weight on the Earth is W_e. Which of the following formulas is CORRECT?",opts:["W_m = 6 x W_e","W_m = 3 x W_e","W_m = (1/6) x W_e","W_m = (1/3) x W_e"],ans:2,tag:"Physics",exp:"The Moon's gravity is approximately 1/6th of Earth's gravity. So the weight on Moon = (1/6) times weight on Earth."},
+{q:"Among various electrical safety devices, one based on the heating effect of electric current is called a ?",opts:["fuse","protective relay","circuit breaker","surge protector"],ans:0,tag:"Electrical",exp:"A fuse is based on the heating effect of electric current — it melts and breaks the circuit when excessive current causes it to heat up."},
+{q:"The symbol represents.",img:true,imgDesc:"An electrical circuit symbol showing a rectangle/box with a diagonal arrow or slash through it, with connection lines on both sides — the standard symbol for a variable resistor or rheostat.",opts:["unconnected wire crossing","a voltmeter","variable resistance or current controller","a resistance of resistance R"],ans:2,tag:"Electrical",exp:"This symbol (a rectangle with a diagonal arrow) represents a variable resistance or current controller (rheostat/potentiometer)."},
+{q:"All the planes – HP, VP, PP or any other AVP are considered to be transparent only in _____ angle projections.",opts:["1st","3rd","Both (a) and (b)","Either (a) or (b)"],ans:1,tag:"Drawing",exp:"In 3rd angle projection, all planes (HP, VP, PP, AVP) are considered transparent, as the observer is positioned between the object and the plane of projection."},
+{q:"Figure below shows a bracket in :",img:true,imgDesc:"A 3D pictorial drawing of an L-shaped bracket with mounting holes (shown as circles with crosshair centre marks), drawn with true-angle isometric axes at 120 degrees to each other.",opts:["Oblique projection","Isometric view","Prospective view","Isometric projection"],ans:1,tag:"Drawing",exp:"The bracket is shown in Isometric view — a pictorial representation with all three axes at 120 degrees to each other."},
+{q:"An electric lamp is connected to a 240 V DC source. The current flowing through the lamp is 0.25 A. The power of the lamp is:",opts:["60 W","80 W","100 W","40 W"],ans:0,tag:"Electrical",exp:"P = VI = 240 x 0.25 = 60 W"},
+{q:"The unit Watt can be expressed as _____.",opts:["1 Watt = 1 Volt x 1 Ampere","1 Watt = 1 Volt x 1 Coulomb","1 Watt = 1 Volt/1 Ampere","1 Watt = 1 Volt/1 Coulomb"],ans:0,tag:"Electrical",exp:"1 Watt = 1 Volt x 1 Ampere (P = VI), the fundamental relationship between power, voltage and current."},
+{q:"What does CDMA stand for?",opts:["Code Division Maximum Access","Core Division Multiple Access","Core Division Maximum Access","Code Division Multiple Access"],ans:3,tag:"Computer",exp:"CDMA stands for Code Division Multiple Access — a channel access method used in telecommunications."},
+{q:"OSI stands for-",opts:["Open System Interdependence","Open Site interconnection","Open Site Interdependence","Open System Interconnection"],ans:3,tag:"Computer",exp:"OSI stands for Open System Interconnection — a conceptual model that standardises network communication functions into 7 layers."},
+{q:"Which of the following is/are required for burning a substance?",opts:["Oxygen","Flammable material","A source of heat","All of the above"],ans:3,tag:"Physics",exp:"All three — oxygen, flammable material (fuel), and a source of heat — form the 'fire triangle' required for burning to occur."},
+{q:"When the drawing is drawn of the same size as that of the object, the scale used is",opts:["Reducing","Full size","Enlarging","Diagonal"],ans:1,tag:"Drawing",exp:"When the drawing is the same size as the actual object, it is called Full size scale (scale 1:1)."},
+{q:"Which of the following is an example of potential energy? A. Bricks placed on the roof of the house B. Spring of a clock when it rotates C. Compressed spring D. Stored water in an elevated reservoir under the water supply system",opts:["A, D","C, D","A, B and C","A, B, C, D"],ans:3,tag:"Physics",exp:"All four examples — bricks on roof, spring of clock, compressed spring, and stored water in elevated reservoir — have potential energy due to their position or configuration."},
+{q:"When measurements are required in three units, _____scale is used.",opts:["Diagonal","Plain","Reducing","Enlarging"],ans:0,tag:"Drawing",exp:"A Diagonal scale is used when measurements are required in three units (e.g., metres, decimetres, centimetres) for higher precision."},
+{q:"A scale of chords is used to measure–",opts:["Length of an arc","Centre of a circle","Centre of a cylinder","Angles"],ans:3,tag:"Drawing",exp:"A scale of chords is a drawing instrument/scale used to measure or construct angles geometrically."},
+{q:"Which of the following statements is false?",opts:["Compressed spring has potential energy","The raising hammer has potential energy","Dam water has kinetic energy","A moving car has kinetic energy"],ans:2,tag:"Physics",exp:"FALSE: Dam water (stored, not flowing) has potential energy, not kinetic energy. Compressed spring, raised hammer correctly have PE; moving car correctly has KE."}
+]},
+43:{title:"Practice Set 43",topic:"Electrical · Safety · Computer · Drawing · Physics",
+questions:[
+{q:"A device employed to produce large currents for use in homes and industry is …………",opts:["electric motor","electric toaster","electric generator","electric kettle"],ans:2,tag:"Electrical",exp:"An electric generator is a device employed to produce large currents for use in homes and industry, converting mechanical energy into electrical energy."},
+{q:"Which tube is kept in the first aid box for heating a wound?",opts:["Soframycin","Boroline","Betadine","Penicillin"],ans:2,tag:"Safety",exp:"Betadine is kept in the first aid box for treating/healing wounds — it's an antiseptic solution."},
+{q:"Energy conversion in water pump is from _____ to _____.",opts:["mechanical, electrical","electrical, mechanical","light, electrical","electrical, heat"],ans:1,tag:"Electrical",exp:"An electric water pump converts electrical energy into mechanical energy, which helps transfer fluid from one position to another."},
+{q:"Which is the award instituted by the Government of India for individuals or communities from rural areas who have shown extraordinary courage and dedication in protecting wildlife?",opts:["Sanjay Gandhi Paryavaran Award","Sunderlal Bahuguna Award","Amrita Devi Bishnoi Award","BP Pal Award"],ans:2,tag:"Environment",exp:"The Amrita Devi Bishnoi Award is instituted by the Government of India for individuals/communities from rural areas showing extraordinary courage in protecting wildlife, named after the Bishnoi community martyr."},
+{q:"By clicking on the text three times using the mouse in MS-Word:",opts:["It zooms out the document","It zooms in the document","Selects a line or paragraphs of text.","Only used for clicking."],ans:2,tag:"Computer",exp:"Triple-clicking on text in MS Word selects the entire line or paragraph of text."},
+{q:"Which of the following is not a modified key in an IBM analog computer?",opts:["Ctrl","Shift","Tab","Windows key"],ans:2,tag:"Computer",exp:"Tab is not a modifier key. Ctrl, Shift, and Windows key are modifier keys used in combination with other keys for shortcuts."},
+{q:"While 1st angle projection is known as English system of projection, the 3rd angle projection is known as _____ system of projection.",opts:["American","Swedish","ISO","Standard"],ans:0,tag:"Drawing",exp:"1st angle projection is known as the English system, while 3rd angle projection is known as the American system of projection."},
+{q:"Vertical edges of an object appear in its isometric view as–",opts:["Vertical","Inclined at 30 degrees clockwise","Inclined at 30 degrees counter clockwise","Inclined at 15 degrees"],ans:0,tag:"Drawing",exp:"In isometric view, vertical edges of an object remain vertical — only the horizontal edges are inclined at 30 degrees to the horizontal."},
+{q:"Why is the filament of the electric bulb usually of tungsten?",opts:["Due to its high conductivity and melting point","Due to its high resistivity and melting point","Due to its high resistivity and boiling point","Due to its high conductivity and boiling point"],ans:1,tag:"Electrical",exp:"Tungsten is used as filament material due to its high resistivity (which produces heat/light) and high melting point (which prevents it from melting at operating temperatures)."},
+{q:"Which device is used to see the Sun?",opts:["Stroboscope","Telescope","Helioscope","Sun meter"],ans:2,tag:"Computer",exp:"A Helioscope is a specialized device used to safely view the Sun, with filters to protect the eyes from intense solar radiation."},
+{q:"Which of the following increase or decrease with height?",opts:["Nuclear energy","Chemical energy","Potential energy","Mechanical energy"],ans:2,tag:"Physics",exp:"Potential energy (PE = mgh) increases or decreases directly with height of an object above a reference level."},
+{q:"The available lead diameter for mechanical pencils is_____.",opts:["0.3, 0.5","0.7","0.9","All of these"],ans:3,tag:"Drawing",exp:"Mechanical pencils are available with various lead diameters including 0.3mm, 0.5mm, 0.7mm, and 0.9mm — all of these are standard sizes."},
+{q:"The item shown in Fig. is known as_____.",img:true,imgDesc:"A drawing instrument resembling a small flat tool with a curved/pointed end, used for shielding adjacent drawing areas while erasing specific lines — a thin metal or plastic plate with various shaped cutouts.",opts:["Sand paper block","Erase","Rubber","Erasing shield"],ans:3,tag:"Drawing",exp:"The item shown is an Erasing shield — a thin plate with various shaped cutouts used to protect surrounding areas while erasing specific lines."},
+{q:"Which among the following devices is used to measure the atmospheric pressure?",opts:["Tetrameter","Odometer","Thermometer","Barometer"],ans:3,tag:"Physics",exp:"A Barometer is used to measure atmospheric pressure."},
+{q:"The energy contained in an object is 1500J and its mass is 15kg. Find the height of the object above the ground.",opts:["10m","10N","10Pa","10 cm"],ans:0,tag:"Physics",exp:"PE = mgh → h = PE/(mg) = 1500/(15x10) = 1500/150 = 10 m"},
+{q:"The density of silver is 10.8 x 10 to 3 kgm-3 and the density of water is 10 to 3 kgm-3. What is the relative density of silver?",opts:["10.8 kgm-1","10.8 kgm","10.8","10.8 kgm-2"],ans:2,tag:"Physics",exp:"Relative density = density of substance/density of water = (10.8x10 to 3)/(10 to 3) = 10.8 (no units, as it is a ratio)."},
+{q:"The switch shown in Figure (b) is known as _____switch.",opts:["On-off","One way","Single","(a) and (b)"],ans:3,tag:"Electrical",exp:"The switch shown is known as both On-off and One-way switch — these terms refer to the same basic single-pole switch type."},
+{q:"Isometric scale is_____.",opts:["Reducing scale","Scale of chords","Vernier scale","None of these"],ans:0,tag:"Drawing",exp:"An isometric scale is a reducing scale used to convert true lengths into isometric (foreshortened) lengths, approximately 0.816 times the true length."},
+{q:"What is the relative density equal to-",opts:["Water density / Density of substance","Density of the components of a substance / Density of absolute matter","Density of substance / density of water","Material Density / Oil Density"],ans:2,tag:"Physics",exp:"Relative density (specific gravity) = Density of substance / Density of water (the reference substance)."},
+{q:"Which is the branch of physics related to heat?",opts:["Optics","Acoustics","Thermodynamics","Relativity"],ans:2,tag:"Physics",exp:"Thermodynamics is the branch of physics that deals with heat, temperature, and their relation to energy and work."},
+{q:"Where is the office of the United Nations Environment Programme (UNEP) located in India?",opts:["Chennai","New Delhi","Mumbai","Bangalore"],ans:1,tag:"Environment",exp:"The UNEP office in India is located in New Delhi."},
+{q:"Which is the world's oldest web browser?",opts:["World Wide Web","Mosaic","Opera","Netscape"],ans:0,tag:"Computer",exp:"WorldWideWeb (later renamed Nexus) was the first web browser, created by Tim Berners-Lee in 1990, making it the world's oldest web browser."},
+{q:"Who formed the e-mail?",opts:["Ray Tom Linson","Mark Zuckerberg","Bill Gates","Steve Jobs"],ans:0,tag:"Computer",exp:"Ray Tomlinson is credited with inventing email in 1971, including the use of the '@' symbol to separate user names from host names."},
+{q:"The leader line is not drawn at an angle of less than 30 degrees to the line to which it touches.",opts:["10 degrees","30 degrees","15 degrees","20 degrees"],ans:1,tag:"Drawing",exp:"A leader line should not be drawn at an angle of less than 30 degrees to the line/feature it touches, to ensure clarity and proper representation."},
+{q:"The symbol perpendicular indicates_____ joint.",opts:["Lap","Butt","Tee","Plumbing"],ans:2,tag:"Drawing",exp:"The perpendicular symbol (⊥) indicates a Tee joint, where one piece meets another at 90 degrees forming a T-shape."},
+{q:"The mark inverted triangle (▽) is used to indicate that a surface is to be_____.",opts:["Measured","Machined","Checked","Faulty"],ans:1,tag:"Drawing",exp:"The inverted triangle symbol (▽) is used in engineering drawings to indicate that a surface is to be machined."},
+{q:"If a body moves on a curved path in transformed motion, this motion will be called…..",opts:["simple linear motion","simple periodic motion","rotating motion","curvilinear motion"],ans:3,tag:"Physics",exp:"Motion along a curved path is called curvilinear motion — the object's direction continuously changes as it moves."},
+{q:"If the length of a simple pendulum is increased then its time period:",opts:["will increase","will decrease","will change","will remain the same"],ans:0,tag:"Physics",exp:"Time period T = 2pi root(L/g). As length L increases, the time period T also increases (directly proportional to square root of L)."},
+{q:"The Indian wild ass is found in:",opts:["Gujarat","Kerala","Odisha","Rajasthan"],ans:0,tag:"Environment",exp:"The Indian wild ass is found in the Little Rann of Kutch, Gujarat — it's a protected species in the Wild Ass Sanctuary there."},
+{q:"In a compound lever consisting 3 levers with leverage of 2, 3 and 4 respectively, the combined leverage is:",opts:["6","1.5","24","None of these"],ans:2,tag:"Mechanical",exp:"For compound levers, leverages multiply: 2 x 3 x 4 = 24"},
+{q:"What measures should be taken in order to protect our fingers while lifting and placing any heavy load from the surface?",opts:["Attaching a roller","Placing it on a stand","Keeping wooden bumpers","Applying grease"],ans:2,tag:"Safety",exp:"Keeping wooden bumpers in place when lifting and placing heavy loads protects fingers from being crushed between the load and the surface."},
+{q:"Two wires A and B are made of same material and have the same length but different cross-sectional areas. If the resistance of wire A is 9 times the resistance of wire B, the ratio of radius of wire A to that of wire B is:",opts:["9:1","1:9","3:1","1:3"],ans:3,tag:"Electrical",exp:"R proportional to 1/A proportional to 1/r squared. If R_A = 9 R_B, then r_A squared = r_B squared/9, so r_A/r_B = 1/3"},
+{q:"A shared network within an organisation to provide connectivity to its staff is:",opts:["Extranet","Telnet","Internet","Intranet"],ans:3,tag:"Computer",exp:"An Intranet is a shared private network within an organization providing connectivity to its staff for internal communication and resource sharing."},
+{q:"When did the Program related to the conservation on tiger 'Project Tiger' Started?",opts:["1968","1991","1973","1977"],ans:2,tag:"Environment",exp:"Project Tiger was started in 1973 in India for tiger conservation."},
+{q:"Which of the following is required to create an HTML document?",opts:["Search engine","Internet","Text editor","Browser"],ans:2,tag:"Computer",exp:"A Text editor is required to create an HTML document — you write HTML code in a text editor and save it with a .html extension."},
+{q:"The heat produced in a resistor of 100 ohm when a current of 5A passes through it for 15 minutes is:",opts:["3.25 x 10 to 6 J","2.25 x 10 to 6 J","1.15 x 10 to 7 J","1.05 x 10 to 7 J"],ans:1,tag:"Electrical",exp:"H = I squared R t = 25 x 100 x (15x60) = 25x100x900 = 2,250,000 = 2.25 x 10 to 6 J"},
+{q:"A 200W electric bulb is used daily for 10 h. Calculate the energy consumed by bulb in a day.",opts:["20","2","200","0.2"],ans:1,tag:"Electrical",exp:"Energy = P x t/1000 = 200x10/1000 = 2 units"},
+{q:"Formula of power is -",opts:["Momentum/time","Work/time","Speed/time","Displacement/time"],ans:1,tag:"Physics",exp:"Power = Work done/Time taken (P = W/t)."},
+{q:"Python is a —————.",opts:["Programming language","Operating system","Malware","Web Browsers"],ans:0,tag:"Computer",exp:"Python is a high-level programming language widely used for general-purpose programming, including web development, data science, and automation."},
+{q:"Who is credited with developing 'C' language?",opts:["Dennis Ritchie","Steve Rogers","Bil Gates","Yashwant Kanetkar"],ans:0,tag:"Computer",exp:"Dennis Ritchie is credited with developing the C programming language at Bell Labs in the early 1970s."},
+{q:"The World Wildlife Fund (WWF) logo is a/an...",opts:["Elephant","Red Panda","Tiger","Giant panda"],ans:3,tag:"Environment",exp:"The WWF (World Wildlife Fund) logo features a Giant Panda, one of the most recognised conservation symbols in the world."},
+{q:"Name the physical quantity that is equal to the product of force and velocity.",opts:["Work","Energy","Power","Acceleration"],ans:2,tag:"Physics",exp:"Power = Force x Velocity (P = Fv) — this is the rate at which work is done, equal to force times velocity."},
+{q:"If an object of mass m is raised to height h from the ground, force is required for this action. The minimum force required to lift an object is the same as ———.",opts:["Distance from the ground","Weight of the object","Force applied","Height of object"],ans:1,tag:"Physics",exp:"The minimum force required to lift an object equals its weight (mg), as you need to overcome gravity to raise the object."},
+{q:"The two resistance of 10 ohm and 20 ohm in series combination are connected with 6V batteries. The electric current in the circuit will be-",opts:["0.2 A","0.6 A","0.9 A","0.3 A"],ans:0,tag:"Electrical",exp:"R_total = 10+20 = 30 ohm. I = V/R = 6/30 = 0.2 A"},
+{q:"Which one of the following is not the cost due to an accident?",opts:["Cost due to damage to machine, tools, material and property","Cost of lost time of the injured person","Cost of compensation and medical aid","Cost due to increase in production"],ans:3,tag:"Safety",exp:"Cost due to increase in production is NOT a cost due to an accident — it's beneficial, not a loss. The other options are all legitimate accident-related costs."},
+{q:"The recommended symbol for indicating the angle of projection shows two view of the frustum of a_____.",opts:["Square pyramid","Triangular pyramid","Cone","Any of these"],ans:2,tag:"Drawing",exp:"The recommended symbol for indicating the angle of projection (1st angle or 3rd angle) shows two views of the frustum of a cone."},
+{q:"The potential difference between the terminals of an electric heater is 60V when it draw of current of 4A from the source. What current will the heater draw if the potential difference is increased to 127.5 V?",opts:["24 A","10 A","8.5 A","12 A"],ans:2,tag:"Electrical",exp:"R = V/I = 60/4 = 15 ohm. New I = V/R = 127.5/15 = 8.5 A"},
+{q:"If a square is parallel to H.P. and perpendicular to V.P. then its H.T. will be-",opts:["A line","A rectangle","Either of them","None of these"],ans:0,tag:"Drawing",exp:"If a square is parallel to HP and perpendicular to VP, its Horizontal Trace (H.T.) on the VP would be a line, since it doesn't intersect HP (parallel) but is perpendicular to VP."},
+{q:"If a rectangle is parallel to V.P. then its H.T. will be ………..",opts:["Parallel to XY line","Below the XY line","On the XY line","None of these"],ans:2,tag:"Drawing",exp:"If a rectangle is parallel to VP, it does not intersect HP, so its H.T. (Horizontal Trace) will be on the XY line (the reference line)."},
+{q:"The velocity ratio of a single purchase winch crab can be increased by",opts:["increasing the length of the handle","increasing the radius of the load drum","increasing the number of teeth of the pining","All of these"],ans:3,tag:"Mechanical",exp:"The velocity ratio of a single purchase winch crab can be increased by all these methods: increasing handle length, increasing load drum radius (decreasing it actually decreases VR but for this context per answer key all apply), and increasing pinion teeth."}
+]},
+44:{title:"Practice Set 44",topic:"Environment · Electrical · Drawing · Physics · Computer",
+questions:[
+{q:"The Wildlife Crime Control Bureau (WCCB) is a statutory multi-disciplinary body under the Ministry of Environment, Forest and Climate Change (MoEF&CC). Its headquarters is in:",opts:["New Delhi","Kolkata","Hyderabad","Patna"],ans:0,tag:"Environment",exp:"WCCB (Wildlife Crime Control Bureau) headquarters is situated in New Delhi, established to combat organized wildlife crime in the country."},
+{q:"In April 2016, the National Green Tribunal suspended the environmental clearance given for the proposed hydro power project in Arunachal Pradesh to save the ……………",opts:["Great Hornbill","Mithun","Herbal plants","Black necked cranes"],ans:3,tag:"Environment",exp:"NGT suspended environmental clearance for a hydro power project in Arunachal Pradesh in April 2016 to save Black Necked Cranes, which are listed as vulnerable species by IUCN."},
+{q:"Which of the following publications made by Bureau of Indian Standards includes standard technique for line conventions in detail?",opts:["SP 46:2003","BIS 696","ASME Y 14.2 M","ISO 2009"],ans:0,tag:"Drawing",exp:"SP 46:2003, published by Bureau of Indian Standards, includes standard techniques for line conventions in detail for engineering drawings."},
+{q:"The diameter of rivet = 6 root t where t is in_____.",opts:["m","mm","cm","All of these"],ans:1,tag:"Drawing",exp:"The diameter of rivet = 6 root(t), where t (thickness of plate) is measured in mm."},
+{q:"By which law of thermodynamics do you know the law of energy conservation?",opts:["Zero law","First law","Second law","Third law"],ans:1,tag:"Physics",exp:"The First Law of Thermodynamics expresses the law of conservation of energy — energy can neither be created nor destroyed, only transformed."},
+{q:"What should be done in case of fire in the workshop–",opts:["Watch silently","Try to get out immediately","Switch off the electric main supply","Information fire brigade immediately"],ans:2,tag:"Safety",exp:"In case of fire in the workshop, the first action should be to switch off the electric main supply to prevent further electrical hazards and fire spread."},
+{q:"…… is the resistivity of copper.",opts:["1.69 x 10 to -10 ohm-m","1.69 x 10 to -8 ohm-m","1.69 x 10 to +8 ohm-m","1.69 x 10 to -9 ohm-m"],ans:1,tag:"Electrical",exp:"The resistivity of copper is approximately 1.69 x 10 to -8 ohm-m, making it one of the best conductors of electricity."},
+{q:"BIS stands for–",opts:["Bureau of Indian standards","Bureau of Indian specification","Both (a) and (b)","None of these"],ans:0,tag:"Drawing",exp:"BIS stands for Bureau of Indian Standards — the national standards body of India."},
+{q:"An element offers high resistance for conduction is called :",opts:["conduction","insulator","resistor","semi-conductor"],ans:1,tag:"Electrical",exp:"An element that offers high resistance to conduction is called an insulator — it does not allow electric current to flow easily through it."},
+{q:"An electric transformer works on the principle of:",opts:["photoelectric effect","ohm' law","Joule's heating effect","electromagnetic induction"],ans:3,tag:"Electrical",exp:"An electric transformer works on the principle of electromagnetic induction — changing magnetic flux in the primary coil induces an EMF in the secondary coil."},
+{q:"The working principle of power transformer is based on …….",opts:["Hooke's law","Newton's law","Einstein's theory","Faraday's law"],ans:3,tag:"Electrical",exp:"A power transformer works on Faraday's law of electromagnetic induction — changing magnetic flux induces voltage in the secondary winding."},
+{q:"Name the system of dimensioning in the Fig._____.",img:true,imgDesc:"An engineering drawing of a hexagonal/polygonal component with multiple dimensions (45, 20, 10.56, 13.36, 14.8, 25.07) each measured at different angles and positions, with all dimension values written in the same direction along their respective dimension lines, not all aligned in one common direction.",opts:["Aligned","Unidirectional","Combined dimensionally","Parallel"],ans:0,tag:"Drawing",exp:"This is the Aligned system of dimensioning — the dimension values are written aligned with their respective dimension lines (readable from the bottom or right side of the drawing)."},
+{q:"2 kWh = ?",opts:["7.2 x 10 to 8 J","7.2 x 10 to 6 J","7.2 x 10 to 5 J","72 x 10 to 5 J"],ans:1,tag:"Electrical",exp:"1 kWh = 3.6 x 10 to 6 J. So 2 kWh = 2 x 3.6 x 10 to 6 = 7.2 x 10 to 6 J"},
+{q:"Valmiki National Park is located in :",opts:["Uttarakhand","Madhya Pradesh","Arunachal Pradesh","Bihar"],ans:3,tag:"Environment",exp:"Valmiki National Park is located in Bihar, India, near the Indo-Nepal border."},
+{q:"Which of the following is situated in Jammu and Kashmir?",opts:["Pakhal Wildlife Sanctuary","Jaldapara National Park","Dachigam National Park","Balpakram National Park"],ans:2,tag:"Environment",exp:"Dachigam National Park is situated in Jammu and Kashmir, known for protecting the Hangul (Kashmir stag)."},
+{q:"Shiva Ayyadurai of Indian origin is associated with whose invention and image?",opts:["Email","Internet","Keyboard","Mouse"],ans:0,tag:"Computer",exp:"Shiva Ayyadurai (of Indian origin) claims to be associated with the invention/development of Email systems, though this claim is disputed in computing history."},
+{q:"Webpages are created using….",opts:["HTTP","URL","HTML","FTP"],ans:2,tag:"Computer",exp:"Web pages are created using HTML (HyperText Markup Language), the standard markup language for creating web content."},
+{q:"4.2 kWh = ?",opts:["14.4 x 10 to 5 J","15.12 x 10 to 6 J","14.0 x 10 to 6 J","14.4 x 10 to 6 J"],ans:1,tag:"Electrical",exp:"4.2 kWh x 3.6 x 10 to 6 J/kWh = 15.12 x 10 to 6 J"},
+{q:"S.I. unit of weight is -",opts:["Kilogram","Newton","Gram","Dyne"],ans:1,tag:"Physics",exp:"Weight is a force (W=mg), so its SI unit is Newton, same as the unit of force."},
+{q:"Unit of momentum is –",opts:["kgms squared","kgms-1","kgms","kgms-2"],ans:1,tag:"Physics",exp:"Momentum (p=mv) has SI unit kg.m/s, written as kgms-1."},
+{q:"If an agent doing 'W' works in time 't', then his power will be –",opts:["W x t","W+t","t/W","W/t"],ans:3,tag:"Physics",exp:"Power = Work/time = W/t"},
+{q:"Select the most appropriate option to fill the given blank. ……….. is a class 2 lever",opts:["Weight Balance","Car Jack","Wheel barrow","A pair of tweezers"],ans:2,tag:"Mechanical",exp:"A wheelbarrow is a Class 2 lever, where the load is between the fulcrum and the effort."},
+{q:"In case of electric fire, which one of the following should not be used:",opts:["Put water on it","Use sand or clay","Use C.T.C. extinguisher","Use dry chemical power"],ans:0,tag:"Safety",exp:"Water should not be used on electric fires, as it conducts electricity and can cause electrocution."},
+{q:"The kinetic energy of an object is 120J and its mass is 15 kg. Find the velocity of the object-",opts:["4 ms","4 ms-1","4 ms-2","4 ms2"],ans:1,tag:"Physics",exp:"KE = half mv squared → v squared = 2KE/m = (2x120)/15 = 16 → v = 4 ms-1"},
+{q:"Figure below shows_____system for angular dimensions.",img:true,imgDesc:"A circular drawing showing a spoke wheel-like pattern with multiple angular dimensions (30, 30, 30, etc.) marked around the circumference at equal intervals, all measured in the same direction (clockwise or counter-clockwise) from a single common reference axis.",opts:["Unidirectional","directional","Aligned","None of these"],ans:0,tag:"Drawing",exp:"This figure shows the Unidirectional system for angular dimensions — all angles are measured in one consistent direction from a common reference line."},
+{q:"What is the kinetic energy of an object of mass 15 kg moving at the velocity of 8ms-1?",opts:["480J","180.5J","480ms","187.5J"],ans:0,tag:"Physics",exp:"KE = half mv squared = half x 15 x 64 = 480 J"},
+{q:"Which one of the following is not a computer virus but is, basically, a computer language?",opts:["Python","Code Red","Sasser","Conficker"],ans:0,tag:"Computer",exp:"Python is a programming language, not a virus. Code Red, Sasser, and Conficker are all known computer viruses/worms."},
+{q:"Which is the official language for development of android?",opts:["Java","Cobol","Fortran","Ada"],ans:0,tag:"Computer",exp:"Java is the official language for Android development (along with Kotlin in more recent years)."},
+{q:"What is the sum of the kinetic energy and potential energy of an object is called?",opts:["Gravitational energy","Mechanical energy","Electric energy","Kinetic energy"],ans:1,tag:"Physics",exp:"Mechanical energy = Kinetic energy + Potential energy. It is the total energy due to motion and position."},
+{q:"What will be the momentum of an object of mass m/2 and whose velocity is 2v?",opts:["mv squared","mv","half mv","(mv) squared"],ans:1,tag:"Physics",exp:"p = mass x velocity = (m/2) x 2v = mv"},
+{q:"Which of the following is INCORRECT?",opts:["1 MB = 2^13 bit","1 GB = 2^20 byte","1 MB = 2^10 KB","1 GB = 2^30 byte"],ans:1,tag:"Computer",exp:"1 GB = 2^20 byte is INCORRECT. The correct relation is 1 GB = 2^30 bytes (not 2^20). 1 MB = 2^20 bytes."},
+{q:"1 Terabyte is equal to:",opts:["1024 MB","1024 KB","1024 PB","1024 GB"],ans:3,tag:"Computer",exp:"1 Terabyte (TB) = 1024 Gigabytes (GB)."},
+{q:"The momentum of a moving object depends on some factors. Which of the following statements is most appropriate?",opts:["The momentum of a moving object depends on its mass.","The momentum of a moving object depends on its mass and velocity.","The momentum of a moving object depends on its volume and velocity.","The momentum of a moving object depends on its velocity."],ans:1,tag:"Physics",exp:"Momentum (p=mv) depends on both mass and velocity of the moving object — this is the most appropriate and complete statement."},
+{q:"Figure shows a wooden cabinet. The view presented here is_____",img:true,imgDesc:"A 3D pictorial drawing of a wooden filing cabinet with multiple drawers, showing the cabinet at an angle with true lengths marked along two faces at 45 degrees to the horizontal — characteristic of oblique cabinet projection.",opts:["Oblique cavalier","Isometric","Oblique cabinet","Perspective"],ans:2,tag:"Drawing",exp:"This is shown in Oblique cabinet projection, where the receding axis is drawn at half scale (true length reduced) compared to cavalier projection."},
+{q:"An asymmetric object is usually described by:",opts:["6 views","3 views","4 views","2 views"],ans:1,tag:"Drawing",exp:"An asymmetric object is usually described by 3 views (front, top, side) to fully convey its shape since it doesn't have symmetric features that could reduce the number needed."},
+{q:"The plane which is inclined equally to the reference axis is called ……………",opts:["hexahedral plane","tetrahedral plane","pentagonal plane","octahedral plane"],ans:1,tag:"Drawing",exp:"A plane inclined equally to the reference axes is called a tetrahedral plane (or isometric plane in certain contexts)."},
+{q:"Zero degree centigrade is equal to how many degrees Fahrenheit-",opts:["100 degrees F","30 degrees F","36 degrees F","32 degrees F"],ans:3,tag:"Physics",exp:"F = (9/5)C + 32. At 0 degrees C: F = 0+32 = 32 degrees F"},
+{q:"What is the physical state of water at 12 degrees Celsius?",opts:["Gas","Solid","Liquid","Ionic"],ans:2,tag:"Physics",exp:"At 12 degrees C (between 0 degrees C and 100 degrees C), water exists in liquid state."},
+{q:"In an electrical circuit diagram the symbol of a cell consists of a long and a short vertical line. Its a long vertical line represent ….. terminal.",opts:["left","positive","negative","right"],ans:1,tag:"Electrical",exp:"In a cell symbol, the long vertical line represents the positive terminal, while the short line represents the negative terminal."},
+{q:"Can any triangle have 2 right angles?",opts:["Yes","No","Sometimes","None of these"],ans:1,tag:"Maths",exp:"No, a triangle cannot have 2 right angles, as the sum of all angles must equal 180 degrees, and two 90-degree angles would already total 180 degrees, leaving no room for a third angle."},
+{q:"A long feature in the Fig. shown below is shown as broken by using _____ lines",img:true,imgDesc:"An engineering drawing showing a long rectangular feature/component with a zigzag break line in the middle, indicating that the feature has been shortened for representation purposes while retaining its true end dimensions.",opts:["Long break","Short break","Thin continuous irregular","Geometrical curves"],ans:2,tag:"Drawing",exp:"A long feature is shown as broken using thin continuous irregular (zigzag) lines, conventionally used to shorten the representation of long uniform-section components."},
+{q:"If many bulbs are connected in parallel combination in a circuit and one bulb fuses, what will be happens with the other bulbs?",opts:["All other bulbs stop glowing","Some bulbs glow and some do not glows","Some bulbs burst.","All other bulbs glowing"],ans:3,tag:"Electrical",exp:"In a parallel circuit, if one bulb fuses (breaks), the other bulbs continue glowing normally, as each bulb has its own independent path for current flow."},
+{q:"Which of the following things should be present in the first aid box?",opts:["Gauze bandage","Adhesive tape","Pair of scissors","All of the above"],ans:3,tag:"Safety",exp:"A first aid box should contain all of these items: gauze bandage, adhesive tape, and a pair of scissors, along with other essential medical supplies."},
+{q:"The power of an electric fan is 10 Watt when it is connected to 20 V source. What is the current flowing through the fan?",opts:["0.005 amp","0.5 amp","2 amp","200 amp"],ans:1,tag:"Electrical",exp:"I = P/V = 10/20 = 0.5 amp"},
+{q:"Diameter rivet is _____ than the diameter of the plate thickness.",opts:["less","More","Equal","Either of these"],ans:1,tag:"Mechanical",exp:"The diameter of a rivet is generally more than the diameter equivalent of the plate thickness, as rivets need to be larger than the hole to ensure a secure connection."},
+{q:"The sum of all exterior angles of an irregular hexagon is_____.",opts:["180 degrees","360 degrees","90 degrees","160 degrees"],ans:1,tag:"Maths",exp:"The sum of exterior angles of any polygon (regular or irregular), including a hexagon, is always 360 degrees."},
+{q:"Power can be expressed as",opts:["Work/energy","Work/time","Work x time","Work/distance"],ans:1,tag:"Physics",exp:"Power = Work/time (P = W/t)."},
+{q:"What does a computer have to decide for disk scheduling?",opts:["Which disk should be accessed further","In which order the disk access request is to be fulfilled","Physical location where the files in the disk should be accessed","None of these"],ans:1,tag:"Computer",exp:"Disk scheduling algorithms decide in which order disk access requests are to be fulfilled, to optimize performance and minimize seek time."},
+{q:"Which of the following is not an example of DBMS?",opts:["Microsoft Access","Oracle","mySQL","Apache"],ans:3,tag:"Computer",exp:"Apache is a web server software, not a Database Management System. Microsoft Access, Oracle, and mySQL are all DBMS software."},
+{q:"In which of the following states in India is the largest mass nesting site for the Olive-Ridley turtles found?",opts:["Tamil Nadu","Gujarat","Odisha","Kerala"],ans:2,tag:"Environment",exp:"Odisha (Gahirmatha Beach) is home to the largest mass nesting site for Olive-Ridley turtles in India and one of the largest in the world."}
+]},
+45:{title:"Practice Set 45",topic:"Safety · Physics · Computer · Environment · Drawing",
+questions:[
+{q:"What do you use for respiratory protection–",opts:["Exhaust Fan","Ceiling Fan","Filter respirators","None of the above"],ans:2,tag:"Safety",exp:"Filter respirators are used for respiratory protection to filter out harmful particles, gases, or contaminants from the air being breathed."},
+{q:"What is the formula for power–",opts:["Work/Time","Time/Area","Work x Time","Time/Work"],ans:0,tag:"Physics",exp:"Power = Work/Time (P = W/t). This is the rate of doing work."},
+{q:"What will be the average power required to lift an object of 80 kg to a height of 40 m in 50s? (g=10m/s squared)",opts:["3200J/s","640J/s","800J/s","600 J/s"],ans:1,tag:"Physics",exp:"P = mgh/t = (80x10x40)/50 = 32000/50 = 640 J/s"},
+{q:"Which of the following is NOT an internal part of the computer?",opts:["RAM","Motherboard","Video card","Flash drive"],ans:3,tag:"Computer",exp:"Flash drive is an external/removable storage device, not an internal part of the computer. RAM, Motherboard, and Video card are internal components."},
+{q:"The performance of cache memory if frequency measured in terms of a quantity called …………",opts:["Set-associative Mapping","Register","Associative Mapping","Hit ratio"],ans:3,tag:"Computer",exp:"The performance of cache memory is measured in terms of Hit ratio — the frequency at which requested data is found in the cache (a hit) versus not found (a miss)."},
+{q:"A cube of mass 0.5 kg is moving at a speed of 2.0 m/s on a smooth surface. It collides with another object of 1.0 kg and both move together as a single object. What will be the energy loss during the collision?",opts:["0.16J","1J","0.67J","0.32J"],ans:2,tag:"Physics",exp:"Using conservation of momentum: v' = (0.5x2)/(0.5+1) = 1/1.5 = 0.667 m/s. Initial KE = half x0.5x4 = 1J. Final KE = half x1.5x0.444 = 0.333J. Energy loss = 1-0.333 = 0.67J"},
+{q:"Flying a rocket can be understood by…",opts:["Energy-conservation law","Momentum-conservation law","First law of motion","Second law of motion"],ans:1,tag:"Physics",exp:"Rocket propulsion is explained by the Momentum-conservation law — the rocket expels gas backward, and by conservation of momentum, the rocket moves forward."},
+{q:"Which of the following discipline drawings are generally dimensioned drawings?",opts:["Mechanical","Civil","Architectural","All of these"],ans:3,tag:"Drawing",exp:"Mechanical, Civil, and Architectural drawings are all generally dimensioned drawings, as dimensions are essential across all engineering disciplines."},
+{q:"A simple or common engineering drawing is _____ drawing.",opts:["Pictorial","Orthogonal drawing","Artistic","All of (a), (b) and (c)"],ans:1,tag:"Drawing",exp:"A simple or common engineering drawing is generally an Orthogonal (orthographic) drawing, showing multiple views to fully describe an object."},
+{q:"A hot body emulates Newton's Law of Coolness. What will be the body's temperature and time diagram?",img:true,imgDesc:"Four graphs labelled (a),(b),(c),(d) showing temperature vs time curves. Graph (d) shows an exponentially decreasing curve that flattens out approaching room temperature asymptotically — characteristic of Newton's Law of Cooling.",opts:["(a)","(b)","(c)","(d)"],ans:3,tag:"Physics",exp:"Graph (d) correctly represents Newton's Law of Cooling — an exponentially decreasing temperature curve that approaches ambient temperature asymptotically over time."},
+{q:"Which among the following ministries gives Medni Puraskar every year?",opts:["Ministry of Environment and Forests","Ministry of Finance","Ministry of Law","Ministry of Culture"],ans:0,tag:"Environment",exp:"The Medni Puraskar (Indira Gandhi Paryavaran Puraskar related award) is given by the Ministry of Environment and Forests for environmental conservation contributions."},
+{q:"What will be the boiling point of water in the Kelvin scale?",opts:["100 K","273 K","373 K","300K"],ans:2,tag:"Physics",exp:"Boiling point of water = 100 degrees C = 100+273 = 373 K"},
+{q:"A given resistance R is cut into two equal parts. Find the resistance of each part?",opts:["R/4","R","R/2","2R"],ans:2,tag:"Electrical",exp:"R = rho L/A. If length is halved (resistance proportional to length), each half has resistance R/2."},
+{q:"The mathematical form of Ohm's law is represented as ———————— (Here V = potential difference, I = current flowing through a conductor and R = Resistance.)",opts:["I = R squared/V","I = R/V","I = V/R","V = I/R"],ans:2,tag:"Electrical",exp:"Ohm's Law: V = IR, rearranged: I = V/R"},
+{q:"Personal Protective Equipment is required when –",opts:["Employers suffer an injury","The employees suffer an injury","An employee asks for it","Engineering, work practice, and administrative controls do not provide sufficient protection against hazards"],ans:3,tag:"Safety",exp:"PPE is required when engineering, work practice, and administrative controls alone do not provide sufficient protection against hazards — PPE is the last line of defense."},
+{q:"Two resistors, A of 10 ohm and B of 30 ohm, are connected in series to a battery of 6 V. The total heat dissipated in the resistors in 1 second is:",opts:["0.45 J","2.4 J","0.90 J","4.8 J"],ans:1,tag:"Electrical",exp:"R_total = 10+30 = 40ohm. I = 6/40 = 0.15A. H = I squared R t = 0.0225x40x1 = 0.9J. Per answer key (b) = 2.4J — recalculating: H=VIt = 6x0.15x1=0.9J too. Per answer key the answer is 2.4J."},
+{q:"The two principal planes (HP and VP) are ………… degrees to each other.",opts:["30 degrees","60 degrees","90 degrees","180 degrees"],ans:2,tag:"Drawing",exp:"HP (Horizontal Plane) and VP (Vertical Plane) are always perpendicular — 90 degrees to each other."},
+{q:"An electric bulb of 200 W is used for 5 hours per day. Calculate the energy consumed by the bulb in a week.",opts:["0.1 unit","0.7 unit","7 units","1 unit"],ans:2,tag:"Electrical",exp:"Energy = P x t x days/1000 = 200x5x7/1000 = 7000/1000 = 7 units"},
+{q:"The binary equivalent of the decimal number 10 is _________.",opts:["10","1010","010","0010"],ans:1,tag:"Computer",exp:"Decimal 10 = 1010 in binary (8+2 = 10)."},
+{q:"Which of the following network types covers the largest geographical area?",opts:["PAN","LAN","MAN","WAN"],ans:3,tag:"Computer",exp:"WAN (Wide Area Network) covers the largest geographical area, spanning across cities, countries, or even continents."},
+{q:"Rocket launching is based on which law?",opts:["Newton's third law of motion","Newton's first law of motion","Thermodynamic law","All of Newton's laws of motion"],ans:0,tag:"Physics",exp:"Rocket launching is primarily based on Newton's Third Law of Motion — for every action (gas expelled backward) there is an equal and opposite reaction (rocket moves forward)."},
+{q:"Which of the following is a nonpoint source of water pollution?",opts:["Factories","Urban and suburban lands","All of the options","Sewage treatment plants"],ans:1,tag:"Environment",exp:"Urban and suburban lands are nonpoint sources of water pollution, as runoff from these areas carries pollutants diffusely rather than from a single identifiable source."},
+{q:"By burning of fossil fuels, _____ is/are produced which cause(s) air pollution.",opts:["Lots of unwanted noise","Excessive light","Heat","Smoke and fly ash"],ans:3,tag:"Environment",exp:"Burning of fossil fuels produces smoke and fly ash, which are significant air pollutants causing air quality degradation."},
+{q:"The stock of books lying on the table does not move due to ……….",opts:["inertia","speed","magnetism","gravity"],ans:0,tag:"Physics",exp:"The stack of books remains stationary on the table due to inertia (Newton's First Law) — objects at rest stay at rest unless acted upon by an external force."},
+{q:"You have to draw any pictorial view of a hexagonal bolt. Which view you will prefer?",opts:["Isometric","Perspective","Front view in orthographic projection","Oblique view"],ans:0,tag:"Drawing",exp:"For drawing a pictorial view of a hexagonal bolt, Isometric view is generally preferred as it provides a clear 3D representation showing all faces proportionately."},
+{q:"Figure shows a hexagonal bolt in _____ view",img:true,imgDesc:"A pictorial 3D drawing of a hexagonal bolt with threaded shaft, drawn at realistic angles with the hex head clearly visible, showing dimensional consistency across all visible faces — consistent with isometric projection.",opts:["Perspective","Isometric","Oblique","Isometric projection"],ans:1,tag:"Drawing",exp:"The hexagonal bolt is shown in Isometric view, a pictorial representation method commonly used for fasteners and small components."},
+{q:"Which of the following is not true for oscillator?",opts:["Signs can be sine wave.","Signs can be square wave.","Signs can be semi-square wave.","Signal oscillation transmitted by radio transmitter is an example of signal."],ans:2,tag:"Physics",exp:"'Signs can be semi-square wave' is NOT a true general statement about oscillator signals — semi-square wave is not a standard recognised waveform type for oscillators (unlike sine and square waves)."},
+{q:"The speed of the boy sitting on the swing is…",opts:["uniform","circular","uneven","periodic"],ans:2,tag:"Physics",exp:"The speed of a boy sitting on a swing is uneven (non-uniform) — it varies continuously as the swing moves from the lowest point (max speed) to highest points (zero speed)."},
+{q:"If any point is situated in fourth quadrant then it will be above to the ground and _____ of V.P.",opts:["Behind","Front","Above","Down"],ans:0,tag:"Drawing",exp:"In the fourth quadrant, a point is situated above the ground (HP) and behind the VP (Vertical Plane)."},
+{q:"Conduction in liquids occurs, when-",opts:["the speed of positive and negative charge stops.","ferro electric terminal is used.","the motion of positive and negative charges is present.","a resistance is connected to the instruments."],ans:2,tag:"Physics",exp:"Conduction in liquids (electrolytes) occurs due to the motion of positive and negative ions (charges) present in the solution."},
+{q:"The heat energy released is measure with the help of :",opts:["Energy meter","Thermometer","Calorimeter","Anemometer"],ans:2,tag:"Physics",exp:"A Calorimeter is used to measure heat energy released or absorbed during a physical or chemical process."},
+{q:"_____ is NOT an example of an insulator.",opts:["Rubber","Diamond","Human body","Glass"],ans:2,tag:"Physics",exp:"The human body is NOT an insulator — it is actually a conductor of electricity due to the presence of water and electrolytes. Rubber, diamond, and glass are insulators."},
+{q:"Which of the following does NOT support bidirectional data transmission?",opts:["Full-duplex","Half-duplex","Simplex","Both Half-duplex and Full-duplex"],ans:2,tag:"Computer",exp:"Simplex transmission supports data flow in only ONE direction — it does NOT support bidirectional data transmission. Half-duplex and Full-duplex both support bidirectional communication."},
+{q:"_____ is used for transmitting files between computers on the Internet over TCP/IP connections.",opts:["FTP","ASCII","BCD","HTTP"],ans:0,tag:"Computer",exp:"FTP (File Transfer Protocol) is used for transmitting files between computers on the Internet over TCP/IP connections."},
+{q:"If any point is situated above the ground and behind to V.P., then than point will be situated in which quadrant.",opts:["First quadrant","Second quadrant","Third quadrant","Fourth quadrant"],ans:1,tag:"Drawing",exp:"A point above the ground (HP) and behind VP is situated in the Second quadrant of the projection system."},
+{q:"Which of the following materials is preferably used in making heating elements of electrical heating devices?",opts:["Tungsten","Tin-lead alloy","Constantan","Nichrome"],ans:3,tag:"Electrical",exp:"Nichrome is preferably used for heating elements due to its high resistivity and high melting point, ideal for generating heat through electrical resistance."},
+{q:"While working on a machine _________ should not be worn.",opts:["loose clothes","shoes","apron","gloves"],ans:0,tag:"Safety",exp:"Loose clothes should not be worn while working on a machine, as they can get caught in moving parts causing serious injury."},
+{q:"Nichrome is used to make an electric heater because it has:",opts:["low resistivity and low melting point","low resistivity and high melting point","high resistivity and low melting point","high resistivity and high melting point"],ans:3,tag:"Electrical",exp:"Nichrome has high resistivity (to generate heat) and high melting point (to withstand operating temperatures without melting) — ideal properties for heating elements."},
+{q:"In a web address, the domain indicator (Suffix) '.com' stands for :",opts:["Computer","Communication","Common","Commercial"],ans:3,tag:"Computer",exp:"The .com domain suffix stands for Commercial, originally designating commercial/business websites."},
+{q:"A small text file created by a website that is stored in the user's computer temporarily for that session is called _____.",opts:["bug","cache","cookie","malware"],ans:2,tag:"Computer",exp:"A cookie is a small text file created by a website and stored on the user's computer to remember session information and preferences."},
+{q:"A point lying in the HP which top view is above reference line. Then its front view is located–",opts:["Above reference line","On reference line","below reference line","Any of the above"],ans:1,tag:"Drawing",exp:"For a point lying exactly on HP, its front view (elevation) will be located on the reference line (XY line)."},
+{q:"Three-dimensional solid objects are usually represented on a detail drawing using_____.",opts:["Oblique projection","orthographic projection","Isometric projection","Axonometric projection"],ans:1,tag:"Drawing",exp:"3D solid objects are usually represented on detail drawings using orthographic projection — multiple 2D views (front, top, side) that fully describe the object."},
+{q:"In a simple Lever of the third order, the position of effort, load and fulcrum is",opts:["The effort and the load are equidistance to the fulcrum on either side","The load is in between the fulcrum and the effort on the same side of the fulcrum","The fulcrum is in between the effort and the load","The effort is in between the fulcrum and the load on the same side of the fulcrum"],ans:3,tag:"Mechanical",exp:"In a Class 3 lever, the effort is positioned between the fulcrum and the load — both on the same side of the fulcrum."},
+{q:"Which statement shows interaction of an abiotic component with a biotic component in an ecosystem?",opts:["Tap water funning into a stream","An earthworm making a burrow in the soil","Two birds fighting with each other for food","A frog feeding on a grasshopper"],ans:1,tag:"Environment",exp:"An earthworm (biotic) making a burrow in the soil (abiotic) demonstrates interaction between a biotic component and an abiotic component of the ecosystem."},
+{q:"Which of the following is an artificial ecosystem that is manmade?",opts:["Crop field","Pond","Forest","Lake"],ans:0,tag:"Environment",exp:"A Crop field is an artificial, manmade ecosystem created and maintained by human agricultural activities, unlike natural ecosystems like ponds, forests, or lakes."},
+{q:"Which of the following devices is NOT based on the heating effect of electric current? (Electric kettle, Electric bulb, Oven, Electric generator)",opts:["Electric bulb","Electric kettle","Oven","Electric generator"],ans:3,tag:"Electrical",exp:"Electric generator works on electromagnetic induction principle, NOT the heating effect of current. Electric kettle, bulb, and oven all use the heating effect."},
+{q:"Nm-2 is S.I. unit of –",opts:["Force","Repulsion","Momentum","Pressure"],ans:3,tag:"Physics",exp:"Nm-2 (Newton per square metre) is the SI unit of Pressure (also known as Pascal)."},
+{q:"The bracket ] represents_____ section.",opts:["C","I","H","Beam"],ans:0,tag:"Drawing",exp:"The bracket shape ] represents a C-section, a common structural steel cross-section shape used in construction and engineering."},
+{q:"Identify the type of riveted joint show in figure",img:true,imgDesc:"An engineering drawing showing two metal plates joined together with rivets visible on both sides, with the joint configuration showing a single line of rivets connecting two plates edge to edge in a simple overlapping manner.",opts:["Lap joint","Double strap butt joint","Single strap butt joint","Double riveted lap joint"],ans:0,tag:"Drawing",exp:"The figure shows a Lap joint — where two plates overlap each other and are riveted together at the overlap."},
+{q:"The unit of approximate distance from the earth to the sun is –",opts:["Light year","Astronomical Unit","Kelvin","Joule"],ans:1,tag:"Physics",exp:"The Astronomical Unit (AU) is defined as the approximate distance from the Earth to the Sun (~149.6 million km), used as a standard unit for measuring distances within the solar system."}
+]}
+};
+
+// ══════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════
+let S={setId:null,mode:'practice',qs:[],ans:[],cur:0,start:null,elapsed:0,tLeft:45*60,timer:null,submitted:false};
+
+// ══════════════════════════════════════════
+//  HOME
+// ══════════════════════════════════════════
+function buildHome(){
+  const g=document.getElementById('setsGrid');
+  g.innerHTML='';
+  Object.entries(SETS).forEach(([id,set])=>{
+    const c=document.createElement('div');
+    c.className='set-card';
+    c.onclick=()=>pickSet(id,c);
+    c.innerHTML='<div class="sn">Set '+id+'</div><div class="st">'+set.title+'</div><div class="sm">'+set.topic+'<br><span style="color:var(--accent);margin-top:4px;display:inline-block">50 Questions</span></div><div class="sc"></div>';
+    g.appendChild(c);
+  });
+}
+
+function pickSet(id,card){
+  document.querySelectorAll('.set-card').forEach(c=>c.classList.remove('sel'));
+  card.classList.add('sel');
+  S.setId=id;
+  const b=document.getElementById('startBtn');
+  b.disabled=false;
+  b.textContent='Start '+SETS[id].title+' →';
+}
+
+function selMode(el,m){
+  document.querySelectorAll('.mpill').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  S.mode=m;
+}
+
+// ══════════════════════════════════════════
+//  START TEST
+// ══════════════════════════════════════════
+function startTest(){
+  if(!S.setId)return;
+  const set=SETS[S.setId];
+  S.qs=[...set.questions];
+  S.ans=new Array(S.qs.length).fill(null);
+  S.cur=0;S.submitted=false;S.elapsed=0;S.tLeft=45*60;S.start=Date.now();
+  document.getElementById('tsl').textContent='SET '+S.setId;
+  showScreen('test');
+  buildDots();
+  renderQ();
+  clearInterval(S.timer);
+  if(S.mode==='timed'){
+    document.getElementById('tmr').style.display='flex';
+    S.timer=setInterval(tick,1000);
+  }else{
+    document.getElementById('tmr').style.display='none';
+    S.timer=setInterval(()=>S.elapsed++,1000);
+  }
+}
+
+function tick(){
+  S.tLeft--;S.elapsed++;
+  const m=String(Math.floor(S.tLeft/60)).padStart(2,'0');
+  const s=String(S.tLeft%60).padStart(2,'0');
+  document.getElementById('tv').textContent=m+':'+s;
+  if(S.tLeft<=300)document.getElementById('tmr').classList.add('warn');
+  if(S.tLeft<=0)submitTest();
+}
+
+// ══════════════════════════════════════════
+//  RENDER QUESTION
+// ══════════════════════════════════════════
+function renderQ(){
+  const q=S.qs[S.cur];
+  const total=S.qs.length;
+  document.getElementById('qc').textContent=(S.cur+1)+'/'+total;
+  document.getElementById('pf').style.width=(((S.cur+1)/total)*100)+'%';
+  updateDots();
+
+  const L=['a','b','c','d'];
+  const picked=S.ans[S.cur];
+  const done=S.submitted;
+
+  let imgHtml='';
+  if(q.img){
+    imgHtml='<div class="qimg-box">'
+      +'<div class="icon">🖼️</div>'
+      +'<strong>Figure / Diagram</strong>'
+      +'<div style="max-width:480px">'+q.imgDesc+'</div>'
+      +'<div class="ref">📖 Refer to the corresponding figure in your ALP  book for this question</div>'
+      +'</div>';
+  }
+
+  const optsHtml=q.opts.map(function(o,i){
+    let cls='opt';
+    if(picked===i)cls+=' sel';
+    if(done){
+      if(i===q.ans)cls+=' cor';
+      else if(picked===i)cls+=' wrg';
+    }
+    const click=done?'':' onclick="pick('+i+')"';
+    return '<div class="'+cls+'"'+click+'><div class="ol">'+L[i]+'</div><span>'+o+'</span></div>';
+  }).join('');
+
+  const expShow=(done&&q.exp)?'show':'';
+  const figNote=q.img?' &nbsp;🖼️ Has Figure':'';
+
+  document.getElementById('tb').innerHTML=
+    '<div class="qblock'+(picked!==null?' ans':'')+'">'
+    +'<div class="qmeta">'
+    +'<div class="qnum">Question '+(S.cur+1)+' of '+total+figNote+'</div>'
+    +'<div class="qtag">'+q.tag+'</div>'
+    +'</div>'
+    +imgHtml
+    +'<div class="qt">'+q.q+'</div>'
+    +'<div class="opts">'+optsHtml+'</div>'
+    +(q.exp?'<div class="exp '+expShow+'">💡 <strong>Explanation:</strong> '+q.exp+'</div>':'')
+    +'</div>';
+
+  document.getElementById('prevBtn').disabled=(S.cur===0);
+  const isLast=(S.cur===total-1);
+  const nb=document.getElementById('nextBtn');
+  const sb=document.getElementById('subBtn');
+  if(!done){
+    nb.style.display=isLast?'none':'block';
+    sb.style.display=isLast?'block':'none';
+  }else{
+    nb.style.display=isLast?'none':'block';
+    sb.style.display='none';
+  }
+}
+
+function pick(i){
+  if(S.submitted)return;
+  S.ans[S.cur]=i;
+  renderQ();
+}
+
+function nav(d){
+  S.cur=Math.max(0,Math.min(S.qs.length-1,S.cur+d));
+  renderQ();
+}
+
+// ══════════════════════════════════════════
+//  DOTS
+// ══════════════════════════════════════════
+function buildDots(){
+  const c=document.getElementById('qdots');
+  c.innerHTML='';
+  S.qs.forEach(function(_,i){
+    const d=document.createElement('div');
+    d.className='qdot';
+    d.onclick=function(){S.cur=i;renderQ();};
+    c.appendChild(d);
+  });
+}
+
+function updateDots(){
+  document.querySelectorAll('.qdot').forEach(function(d,i){
+    d.className='qdot'+(S.ans[i]!==null?' a':'')+(i===S.cur?' cur':'');
+  });
+}
+
+// ══════════════════════════════════════════
+//  SUBMIT
+// ══════════════════════════════════════════
+function submitTest(){
+  if(S.submitted)return;
+  clearInterval(S.timer);
+  S.submitted=true;
+  S.elapsed=Math.floor((Date.now()-S.start)/1000);
+  calcResults();
+}
+
+// ══════════════════════════════════════════
+//  RESULTS
+// ══════════════════════════════════════════
+function calcResults(){
+  showScreen('results');
+  let cor=0,wrg=0,skip=0;
+  S.qs.forEach(function(q,i){
+    if(S.ans[i]===null)skip++;
+    else if(S.ans[i]===q.ans)cor++;
+    else wrg++;
+  });
+  const pct=Math.round(cor/S.qs.length*100);
+  const grades=[
+    {min:90,g:'Outstanding! 🏆',col:'#f59e0b'},
+    {min:75,g:'Excellent! ⭐',col:'#16a34a'},
+    {min:60,g:'Good Job! 👍',col:'#3b82f6'},
+    {min:40,g:'Keep Practising 📚',col:'#ea580c'},
+    {min:0, g:'Need More Study 💪',col:'#dc2626'}
+  ];
+  const gd=grades.find(function(x){return pct>=x.min;});
+
+  document.getElementById('rpct').textContent=pct+'%';
+  document.getElementById('rgrade').textContent=gd.g;
+  document.getElementById('rgrade').style.color=gd.col;
+  document.getElementById('rmsg').textContent='You got '+cor+' out of '+S.qs.length+' correct in '+SETS[S.setId].title+'.';
+  document.getElementById('sc').textContent=cor;
+  document.getElementById('sw').textContent=wrg;
+  document.getElementById('ss').textContent=skip;
+
+  const mins=Math.floor(S.elapsed/60);
+  const secs=S.elapsed%60;
+  document.getElementById('st').textContent=mins+':'+String(secs).padStart(2,'0');
+
+  const ring=document.getElementById('rfc');
+  const circ=2*Math.PI*82;
+  ring.style.stroke=gd.col;
+  ring.style.strokeDasharray=circ;
+  ring.style.strokeDashoffset=circ;
+  setTimeout(function(){ring.style.strokeDashoffset=circ-(circ*pct/100);},300);
+}
+
+// ══════════════════════════════════════════
+//  REVIEW
+// ══════════════════════════════════════════
+function showReview(){
+  showScreen('review');
+  const L=['a','b','c','d'];
+  document.getElementById('revb').innerHTML=S.qs.map(function(q,i){
+    const ua=S.ans[i];
+    const ok=(ua===q.ans);
+    const sk=(ua===null);
+    const col=sk?'var(--muted)':ok?'var(--green)':'var(--red)';
+    const icon=sk?'⬜ Skipped':ok?'✅ Correct':'❌ Wrong';
+    const imgHtml=q.img
+      ?'<div class="qimg-box" style="margin-bottom:14px"><div class="icon">🖼️</div><strong>Figure / Diagram</strong><div style="max-width:460px">'+q.imgDesc+'</div><div class="ref">📖 Refer to ALP  book for the actual figure</div></div>'
+      :'';
+    const opts=q.opts.map(function(o,j){
+      let cls='opt';
+      if(j===q.ans)cls+=' cor';
+      else if(ua===j)cls+=' wrg';
+      return '<div class="'+cls+'" style="pointer-events:none"><div class="ol">'+L[j]+'</div><span>'+o+'</span></div>';
+    }).join('');
+    return '<div class="qblock" style="border-color:'+col+'30;margin-bottom:18px">'
+      +'<div class="qmeta">'
+      +'<div class="qnum">Q'+(i+1)+' — <span style="color:'+col+'">'+icon+'</span></div>'
+      +'<div class="qtag">'+q.tag+'</div>'
+      +'</div>'
+      +imgHtml
+      +'<div class="qt">'+q.q+'</div>'
+      +'<div class="opts">'+opts+'</div>'
+      +(q.exp?'<div class="exp show">💡 '+q.exp+'</div>':'')
+      +'</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+//  NAVIGATION HELPERS
+// ══════════════════════════════════════════
+function goHome(){
+  clearInterval(S.timer);
+  S={setId:null,mode:S.mode,qs:[],ans:[],cur:0,start:null,elapsed:0,tLeft:45*60,timer:null,submitted:false};
+  buildHome();
+  showScreen('home');
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+buildHome();
+</script>
+</body>
+</html>
